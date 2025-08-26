@@ -3,15 +3,15 @@ import axios from "axios";
 import type { Note, NewNote } from "@/types/note";
 
 
-interface NoteHttpResponse {
+ interface NoteHttpResponse {
   notes: Note[];
   totalPages: number;
 }
 
 
-
-
 const myKey = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN;
+
+
 
 
 export async function fetchNotes(search: string, page: number, tag:string): Promise<NoteHttpResponse> {

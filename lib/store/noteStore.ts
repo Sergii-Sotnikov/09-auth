@@ -2,6 +2,8 @@ import { create } from "zustand";
 import type { NewNote } from "@/types/note";
 import { persist } from "zustand/middleware";
 
+
+
 const initialDraft: NewNote = {
   title: "",
   content: "",
@@ -25,3 +27,5 @@ export const useNoteDraft = create<NoteDraft>()(
     name: 'draft',
   })
 );
+
+ 
