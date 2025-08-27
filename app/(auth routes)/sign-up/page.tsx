@@ -29,8 +29,6 @@ const SignUp = () => {
     }
   };
 
-
-
   return (
     <main className={css.mainContent}>
       <h1 className={css.formTitle}>Sign up</h1>
