@@ -25,9 +25,10 @@ export async function outUser() {
 }
 
 export async function getUser() {
-  const { data } = await nextServer.post<User>("/users/me", {withCredentials: true,});
+  const { data } = await nextServer.get<User>("/users/me", {withCredentials: true});
   return data;
 }
+
 
 export async function editUser(dataUser: { username: string }) {
   const { data } = await nextServer.patch<User>("/users/me", dataUser);
