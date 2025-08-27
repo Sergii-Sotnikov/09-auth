@@ -2,8 +2,10 @@
 import { RegistedUser } from "@/types/user"
 import css from "./SignInPage.module.css"
 import { loginUser } from "@/lib/api/clientApi";
+import { useRouter } from "next/router";
 
 const SignIn = () => {
+  const router = useRouter();
   const handleLogin = async (formData:FormData) => {
     const data = Object.fromEntries(formData) as RegistedUser;
     const res = await loginUser(data)

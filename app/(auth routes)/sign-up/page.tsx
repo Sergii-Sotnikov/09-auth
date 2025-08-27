@@ -9,22 +9,24 @@ import { ApiError } from "@/types/apiError";
 
 const SignUp = () => {
   const router = useRouter();
-  const setUser = useAuthStore((state) => state.setUser);
   const [error, setError] = useState("");
+
   const handleSubmit = async (formData: FormData) => {
-    const values = Object.fromEntries(formData) as unknown as CreateUserData;
     try {
+      const values = Object.fromEntries(formData) as unknown as CreateUserData;
       const user = await RegisteredUser(values);
-      setUser(user);
-      router.push("/profile");
+      if (user) {
+        router.push("/profile");
+      } else {
+        setError("Invalid email or password");
+      }
     } catch (error) {
-      const err = error as ApiError;
-      const errorData = err.response?.data;
       setError(
-        errorData?.message ?? errorData?.error ?? err.message ?? "Some error"
-      );
+        (error as ApiError).response?.data?.error ??
+          (error as ApiError).message ??
+          'Oops... some error'
+      )
     }
-  
   };
 
   console.log(useAuthStore);
