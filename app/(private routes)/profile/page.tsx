@@ -1,13 +1,13 @@
-import { getUser } from "@/lib/api/clientApi";
+
 import css from "./profile.module.css";
 import Image from "next/image";
 import Link from "next/link";
-
+import { getUserServer } from "@/lib/api/serverApi";
 
 
 
 export default async function Profile() {
-  const user = await getUser()
+  const user = await getUserServer()
   console.log(user)
   return (
     <main className={css.mainContent}>

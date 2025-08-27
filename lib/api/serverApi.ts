@@ -1,6 +1,6 @@
 import { User } from "@/types/user";
 import nextServer from "./api";
-import { cookies, headers } from "next/headers";
+import { cookies } from "next/headers";
 import { Note } from "@/types/note";
 import { SessionRespData } from "@/types/session";
 
@@ -9,9 +9,10 @@ interface NoteHttpResponse {
   totalPages: number;
 }
 
-export async function getUserServer() {
+export async function getUserServer(): Promise<User> {
   const cookieStore = await cookies();
-  const { data } = await nextServer.post<User>("/users/me", {
+  console.log(cookieStore)
+  const { data } = await nextServer.get<User>("/users/me", {
     headers: {
       Cookie: cookieStore.toString(),
     },

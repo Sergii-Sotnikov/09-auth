@@ -1,10 +1,16 @@
-
+'use client'
+import { RegistedUser } from "@/types/user"
 import css from "./SignInPage.module.css"
+import { loginUser } from "@/lib/api/clientApi";
 
 const SignIn = () => {
+  const handleLogin = async (formData:FormData) => {
+    const data = Object.fromEntries(formData) as RegistedUser;
+    const res = await loginUser(data)
+   }
   return (
     <main className={css.mainContent}>
- <form className={css.form}>
+ <form className={css.form} action={handleLogin}>
     <h1 className={css.formTitle}>Sign in</h1>
 
     <div className={css.formGroup}>

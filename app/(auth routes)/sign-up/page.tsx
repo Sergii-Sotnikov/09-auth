@@ -13,20 +13,18 @@ const SignUp = () => {
   const [error, setError] = useState("");
   const handleSubmit = async (formData: FormData) => {
     const values = Object.fromEntries(formData) as unknown as CreateUserData;
-    console.log(values);
     try {
       const user = await RegisteredUser(values);
       setUser(user);
-      console.log(user);
       router.push("/profile");
     } catch (error) {
       const err = error as ApiError;
-      console.log(err)
       const errorData = err.response?.data;
       setError(
         errorData?.message ?? errorData?.error ?? err.message ?? "Some error"
       );
     }
+  
   };
 
   console.log(useAuthStore);

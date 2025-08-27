@@ -15,7 +15,7 @@ export async function RegisteredUser(payload: CreateUserData) {
 }
 
 
-export async function loginUser(payload: CreateUserData) {
+export async function loginUser(payload: RegistedUser) {
   const { data } = await nextServer.post<User>("/auth/login", payload);
   return data;
 }
