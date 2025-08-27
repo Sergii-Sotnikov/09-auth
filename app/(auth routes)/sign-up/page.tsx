@@ -29,7 +29,7 @@ const SignUp = () => {
     }
   };
 
-  console.log(useAuthStore);
+
 
   return (
     <main className={css.mainContent}>

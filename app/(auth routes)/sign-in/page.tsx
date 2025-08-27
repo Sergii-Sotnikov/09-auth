@@ -3,13 +3,31 @@ import { RegistedUser } from "@/types/user"
 import css from "./SignInPage.module.css"
 import { loginUser } from "@/lib/api/clientApi";
 import { useRouter } from "next/router";
+import { useState } from "react";
+import { ApiError } from "@/types/apiError";
 
 const SignIn = () => {
   const router = useRouter();
+  const [error, setError] = useState("");
+
   const handleLogin = async (formData:FormData) => {
-    const data = Object.fromEntries(formData) as RegistedUser;
-    const res = await loginUser(data)
-   }
+    try{
+      const values = Object.fromEntries(formData) as RegistedUser;
+      const user = await loginUser(values)
+      if (user) {
+        router.push("/profile");
+          } else {
+        setError("Invalid email or password");
+      }
+     } catch (error) {
+            setError(
+              (error as ApiError).response?.data?.error ??
+                (error as ApiError).message ??
+                'Oops... some error'
+            )
+          }
+   };
+
   return (
     <main className={css.mainContent}>
  <form className={css.form} action={handleLogin}>
@@ -31,7 +49,7 @@ const SignIn = () => {
       </button>
     </div>
 
-    {/* <p className={css.error}>{error}</p> */}
+    <p className={css.error}>{error}</p>
   </form>
 </main>
   )
