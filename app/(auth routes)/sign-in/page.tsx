@@ -5,10 +5,13 @@ import { loginUser } from "@/lib/api/clientApi";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { ApiError } from "@/types/apiError";
+import { useAuthStore } from "@/lib/store/authStore";
+
 
 const SignIn = () => {
   const router = useRouter();
   const [error, setError] = useState("");
+  const setUser = useAuthStore((state) => state.setUser);
 
   const handleLogin = async (formData:FormData) => {
     try{
@@ -16,6 +19,7 @@ const SignIn = () => {
       const user = await loginUser(values)
       if (user) {
         router.push("/profile");
+        setUser(user);
           } else {
         setError("Invalid email or password");
       }

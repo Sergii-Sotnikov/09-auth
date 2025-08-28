@@ -9,7 +9,6 @@ import { getUserServer } from "@/lib/api/serverApi";
 
 export default async function Profile() {
   const user = await getUserServer()
-  console.log(user)
   return (
     <main className={css.mainContent}>
       <div className={css.profileCard}>

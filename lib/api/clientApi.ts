@@ -24,7 +24,7 @@ export async function outUser() {
   await nextServer.post<User>("/auth/logout");
 }
 
-export async function getUser() {
+export async function getUser(): Promise<User | null> {
   const { data } = await nextServer.get<User>("/users/me", {withCredentials: true});
   return data;
 }

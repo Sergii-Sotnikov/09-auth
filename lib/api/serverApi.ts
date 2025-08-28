@@ -2,7 +2,6 @@ import { User } from "@/types/user";
 import nextServer from "./api";
 import { cookies } from "next/headers";
 import { Note } from "@/types/note";
-import { SessionRespData } from "@/types/session";
 
 interface NoteHttpResponse {
   notes: Note[];
@@ -53,16 +52,15 @@ export async function fetchNoteByIdServer(noteId: string) {
   return data;
 }
 
-export async function checkSessionServer() {
-  try {
-    const cookieStore = await cookies();
-    const { data } = await nextServer.get<SessionRespData>("/auth/session", {
-      headers: {
-        Cookie: cookieStore.toString(),
-      },
-    });
-    return data;
-  } catch {
-    throw new Error("Session invalid");
-  }
-}
+
+export const checkSessionServer = async () => {
+  const cookieStore = await cookies();
+  const res = await nextServer.get('/auth/session', {
+    headers: {
+      Cookie: cookieStore.toString(),
+    },
+  });
+
+  return res;
+};
+

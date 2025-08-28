@@ -1,6 +1,6 @@
 "use client"
 
-import { checkSessionUser, getUser } from "@/lib/api/clientApi";
+import {  checkSessionUser, getUser } from "@/lib/api/clientApi";
 import { useAuthStore } from "@/lib/store/authStore";
 import { ReactNode, useEffect } from "react"
 
@@ -20,8 +20,7 @@ const AuthProvider = ({children}:AuthProviderProps) => {
                 if (user){
                     setUser(user);
                 }
-            }
-            else{clearIsAuthenticated()}
+            } else{clearIsAuthenticated()}
         }
         fetchUser()
     }, [clearIsAuthenticated, setUser])

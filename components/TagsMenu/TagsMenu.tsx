@@ -6,7 +6,6 @@ import Link from "next/link";
 const TagsMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-
   const tags = [
     "All",
     "Todo",
