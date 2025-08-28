@@ -36,13 +36,10 @@ export async function editUser(dataUser: { username: string }) {
 }
 
 export async function checkSessionUser() {
-  try {
     const { data } = await nextServer.get<SessionRespData>("/auth/session");
-    return data;
-  } catch{
-    throw new Error("Session invalid");
-  }
+   return data.success;
 }
+
 
 export async function getNotesUser(search: string, page: number, tag:string): Promise<NoteHttpResponse> {
   const options = {
