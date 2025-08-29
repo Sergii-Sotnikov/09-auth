@@ -17,7 +17,7 @@ const AuthLayout = ({children}:AuthLayoutProps) => {
         }, [router])
 
   return (
-    <>{loading ? <div>Loading...</div> : children}</>
+    <>{loading ? <div>Loading.....</div> : children}</>
   )
 }
 
