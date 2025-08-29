@@ -12,7 +12,6 @@ const SignIn = () => {
   const router = useRouter();
   const [error, setError] = useState("");
   const setUser = useAuthStore((state) => state.setUser);
-  router.refresh();
   const handleLogin = async (formData:FormData) => {
     try{
       const values = Object.fromEntries(formData) as RegistedUser;
