@@ -36,7 +36,7 @@ export async function middleware(request: NextRequest) {
         }
 
         if (isPublicRoute) {
-          return NextResponse.redirect(new URL('/', request.url), {
+          return NextResponse.redirect(new URL('/profile', request.nextUrl), {
             headers: {
               Cookie: cookieStore.toString(),
             },
@@ -58,7 +58,7 @@ export async function middleware(request: NextRequest) {
       }
 
       if (isPrivateRoute) {
-        return NextResponse.redirect(new URL('/sign-in', request.url));
+        return NextResponse.redirect(new URL('/sign-in', request.nextUrl));
       }
     
 
