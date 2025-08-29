@@ -1,7 +1,7 @@
 
-import {fetchNotes} from "@/lib/api"
 import NotesClients from "./Notes.client";
 import type { Metadata } from "next";
+import { getNotesServer } from "@/lib/api/serverApi";
 
 
 type Props = {
@@ -37,7 +37,7 @@ export default async function Notes({params}:Props){
 
   const initialTag = slug[0] === 'All' ? '' : slug[0];
 
-    const initialData = await fetchNotes("", 1, initialTag);
+    const initialData = await getNotesServer("", 1, initialTag);
 
   return (
     <>

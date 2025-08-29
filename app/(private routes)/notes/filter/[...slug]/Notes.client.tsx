@@ -14,6 +14,7 @@ import { Note } from "@/types/note";
 import css from "./NotePage.module.css";
 import { useDebounce } from 'use-debounce';
 import Link from "next/link";
+import { getNotesUser } from "@/lib/api/clientApi";
 
 interface Props {
   initialData: {
@@ -38,7 +39,7 @@ const NotesClients = ({
 
   const { data, isLoading, isError, isSuccess } = useQuery({
     queryKey: ["notes", debouncedQuery, page, initialTag],
-    queryFn: () => fetchNotes(debouncedQuery ,page, initialTag),
+    queryFn: () => getNotesUser(debouncedQuery ,page, initialTag),
     placeholderData: keepPreviousData,
     initialData,
   });
