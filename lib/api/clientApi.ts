@@ -70,3 +70,4 @@ export async function fetchNoteByIdUser(noteId:string) {
   const {data}= await nextServer.get<Note>(`/notes/${noteId}`)
   return data
 }
+

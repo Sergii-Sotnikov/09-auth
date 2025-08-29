@@ -1,6 +1,5 @@
 "use client";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
-import { fetchNotes } from "@/lib/api";
 import SearchBox from "@/components/SearchBox/SearchBox";
 import { useEffect, useState } from "react";
 import { toast, Toaster } from "react-hot-toast";
@@ -8,8 +7,6 @@ import NoteList from "@/components/NoteList/NoteList";
 import Loader from "@/components/Loader/Loader";
 import ErrorMessage from "@/components/ErrorMessage/ErrorMessage";
 import Pagination from "@/components/Pagination/Pagination";
-import Modal from "@/components/Modal/Modal";
-import NoteForm from "@/components/NoteForm/NoteForm";
 import { Note } from "@/types/note";
 import css from "./NotePage.module.css";
 import { useDebounce } from 'use-debounce';

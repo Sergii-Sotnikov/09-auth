@@ -7,11 +7,16 @@ const NotesSidebar = ()=>{
 
       const tags = [
     "All",
-    "Todo",
     "Work",
     "Personal",
     "Meeting",
     "Shopping",
+    "Ideas",
+    "Travel",
+    "Finance",
+    "Health",
+    "Important",
+    "Todo"
   ];
 return(
     <ul className={css.menuList}>

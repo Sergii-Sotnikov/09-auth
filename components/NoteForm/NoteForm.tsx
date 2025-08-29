@@ -3,11 +3,12 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import css from "./NoteForm.module.css";
 import * as Yup from "yup";
 import type { NewNote } from "@/types/note";
-import { postNote } from "@/lib/api";
-import { toast } from "react-hot-toast";
+import { toast, Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { useNoteDraft } from "@/lib/store/noteStore";
-import type { ChangeEvent } from "react";
+import { useState, type ChangeEvent } from "react";
+import { createNoteUser } from "@/lib/api/clientApi";
+import { ApiError } from "@/types/apiError";
 
 const OrderSchema = Yup.object().shape({
   title: Yup.string()
@@ -16,26 +17,57 @@ const OrderSchema = Yup.object().shape({
     .required("Title is required"),
   content: Yup.string().max(500, "Too Long!"),
   tag: Yup.string()
-    .oneOf(["Todo", "Work", "Personal", "Meeting", "Shopping"], "Invalid tag")
+    .oneOf([
+    "All",
+    "Work",
+    "Personal",
+    "Meeting",
+    "Shopping",
+    "Ideas",
+    "Travel",
+    "Finance",
+    "Health",
+    "Important",
+    "Todo"
+  ], "Invalid tag")
     .required("Tag is required"),
 });
 
 export default function NoteForm() {
-  const tags = ["Todo", "Work", "Personal", "Meeting", "Shopping"];
+  const tags = [
+    "All",
+    "Work",
+    "Personal",
+    "Meeting",
+    "Shopping",
+    "Ideas",
+    "Travel",
+    "Finance",
+    "Health",
+    "Important",
+    "Todo"
+  ];
   const { draft, setDraft, clearDraft } = useNoteDraft();
   const queryClient = useQueryClient();
+  const [error, setError] = useState("");
   const router = useRouter();
   const { mutate, isPending } = useMutation({
-    mutationFn: postNote,
+    mutationFn: createNoteUser,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["notes"] });
       toast.success("Note added");
       clearDraft();
       router.back();
     },
-    onError() {
-      toast.error("Failed to create note");
+    onError(error) {
+      const errorMessage = 
+                    (error as ApiError).response?.data?.error ??
+                      (error as ApiError).message ??
+                      'Oops... some error';
+    setError(errorMessage)
+    toast.error(errorMessage)
     },
+
   });
 
   const handleCancel = () => router.back();
@@ -55,6 +87,8 @@ export default function NoteForm() {
   };
 
   return (
+    <>
+    <Toaster position="top-center" />
     <form className={css.form} action={handleSubmit}>
       <div className={css.formGroup}>
         <label htmlFor="title">Title</label>
@@ -109,5 +143,6 @@ export default function NoteForm() {
         </button>
       </div>
     </form>
+        </>
   );
 }

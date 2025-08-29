@@ -4,8 +4,27 @@ import css from "./profile.module.css";
 import Image from "next/image";
 import Link from "next/link";
 import { getUserServer } from "@/lib/api/serverApi";
+import { Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: 'Profile page',
+  description: 'Access and update your personal profile details.',
 
+  openGraph: {
+    title: 'Profile page',
+    description: 'Access and update your personal profile details.',
+    url: 'https://09-auth-six-liart.vercel.app/',
+    siteName: 'MyApp',
+    images: [
+      {
+        url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Profile page',
+      },
+    ],
+  },
+};
 
 export default async function Profile() {
   const user = await getUserServer()

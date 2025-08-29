@@ -3,10 +3,10 @@
 import { useParams, useRouter} from "next/navigation";
 import css from "./NotePreview.client.module.css"
 import { useQuery } from "@tanstack/react-query";
-import { fetchNoteById } from "@/lib/api";
 import Loader from "@/components/Loader/Loader";
 import ErrorMessage from "@/components/ErrorMessage/ErrorMessage";
 import Modal from "@/components/Modal/Modal";
+import { fetchNoteByIdUser } from "@/lib/api/clientApi";
 
 const NoteDetailsClient = () => {
 
@@ -14,7 +14,7 @@ const NoteDetailsClient = () => {
     const router = useRouter();
     const {data:note, isLoading, error} = useQuery({
         queryKey: ['note', id],
-        queryFn: ()=> fetchNoteById(id),
+        queryFn: ()=> fetchNoteByIdUser(id),
         refetchOnMount: false,
     })
     

@@ -8,12 +8,18 @@ const TagsMenu = () => {
 
   const tags = [
     "All",
-    "Todo",
     "Work",
     "Personal",
     "Meeting",
     "Shopping",
+    "Ideas",
+    "Travel",
+    "Finance",
+    "Health",
+    "Important",
+    "Todo"
   ];
+
   const openTags= () => {
     setIsOpen(!isOpen)
   }
